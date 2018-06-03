@@ -3,14 +3,15 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashSet;
 
-public class RegularOrder implements Order {
+/**
+ * RegularOrder class, which is an abstract class that sorts sets of files into an ordered array.
+ */
+public abstract class RegularOrder implements Order {
 
+    /** Specific comparator used by subclass in sort. */
     protected Comparator<File> comparator;
 
-    RegularOrder(Comparator<File> comparator) {
-        this.comparator = comparator;
-    }
-
+    @Override
     public File[] sort(HashSet<File> files) {
 
         File[] orderedFiles = (File[]) files.toArray();
