@@ -8,6 +8,8 @@ public class Manager {
 
     private String sourceDirectoryPath;
     private String commandsFilePath;
+    private static final String INVALID_NUMBER_OF_ARGUMENTS = "Invalid number of arguments. \n";
+    private static final String IO_ERROR = "IO error encountered. \n";
 
     public Manager(String sourceDirectoryPath, String commandsFilePath){
         this.sourceDirectoryPath = sourceDirectoryPath;
@@ -37,8 +39,7 @@ public class Manager {
 
         // Check that the number of system arguments is valid.
         if (args.length != NUMBER_VALID_ARGUMENTS){
-            System.err.println("ERROR: Invalid number of arguments. \n");
-            return;
+            Parsing.printTypeIIError(INVALID_NUMBER_OF_ARGUMENTS);
         }
 
         Manager theManager = new Manager(args[0], args[1]);
