@@ -3,9 +3,9 @@
  */
 public class OrderFactory {
 
-    private final String ABS_ORDER = "abs";
-    private final String TYPE_ORDER = "type";
-    private final String SIZE_ORDER = "size";
+    private static final String ABS_ORDER = "abs";
+    private static final String TYPE_ORDER = "type";
+    private static final String SIZE_ORDER = "size";
 
     /**
      * Returns the desired type of order, either a regular one or reversed.
@@ -13,7 +13,7 @@ public class OrderFactory {
      * @param isNotReversed should the order be reversed or not.
      * @return instance of the desired order.
      */
-    public Order getOrder(String orderType, boolean isNotReversed) {
+    public static Order getOrder(String orderType, boolean isNotReversed) {
 
         if (orderType == null) return null;
 
