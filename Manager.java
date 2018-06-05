@@ -8,8 +8,8 @@ public class Manager {
 
     private String sourceDirectoryPath;
     private String commandsFilePath;
+    private static final String TYPE_II_ERROR_PREFIX = "ERROR: ";
     private static final String INVALID_NUMBER_OF_ARGUMENTS = "Invalid number of arguments. \n";
-    private static final String IO_ERROR = "IO error encountered. \n";
 
     public Manager(String sourceDirectoryPath, String commandsFilePath){
         this.sourceDirectoryPath = sourceDirectoryPath;
@@ -35,11 +35,19 @@ public class Manager {
         }
     }
 
+    protected static void printTypeIIError(String errorMessage){
+        //Print a message involving the given parameters
+        System.err.println(TYPE_II_ERROR_PREFIX + errorMessage);
+
+        //exit system
+        System.exit(0);
+    }
+
     public static void main(String[] args){
 
         // Check that the number of system arguments is valid.
         if (args.length != NUMBER_VALID_ARGUMENTS){
-            Parsing.printTypeIIError(INVALID_NUMBER_OF_ARGUMENTS);
+            Manager.printTypeIIError(INVALID_NUMBER_OF_ARGUMENTS);
         }
 
         Manager theManager = new Manager(args[0], args[1]);
