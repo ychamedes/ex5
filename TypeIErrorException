@@ -1,9 +1,3 @@
 public class TypeIErrorException extends Exception {
     
-    public TypeIErrorException(){}
-    
-    public TypeIErrorException(String lineNumber){
-        super(lineNumber);
-    }
-    
 }
