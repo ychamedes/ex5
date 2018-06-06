@@ -6,7 +6,6 @@ public class OrderFactory {
     private static final String ABS_ORDER = "abs";
     private static final String TYPE_ORDER = "type";
     private static final String SIZE_ORDER = "size";
-    public static final String[] VALID_ORDERS = {ABS_ORDER, TYPE_ORDER, SIZE_ORDER};
 
     /**
      * Returns the desired type of order, either a regular one or reversed.
