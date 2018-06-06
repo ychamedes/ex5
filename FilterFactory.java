@@ -16,7 +16,8 @@ public class FilterFactory {
             ALL_COMMAND};
 
 
-    public static Filter buildFilter(String filterType, FilterParameter[] parameters, boolean isNot) {
+    public static Filter buildFilter(String filterType, FilterParameter[] parameters, boolean isNot) throws
+            TypeIErrorException{
         if (!isNot) {
             switch (filterType) {
                 case GREATER_COMMAND:
@@ -42,35 +43,34 @@ public class FilterFactory {
                 case ALL_COMMAND:
                     return new AllFilter();
                 default:
-                    return new AllFilter();
+                    throw new TypeIErrorException();
             }
         } else {
             switch (filterType) {
                 case GREATER_COMMAND:
-                    return new NotFilter(GreaterThanFilter(parameters));
+                    return new NotFilter(new GreaterThanFilter(parameters));
                 case BETWEEN_COMMAND:
-                    return new NotFilter(BetweenFilter(parameters));
+                    return new NotFilter(new BetweenFilter(parameters));
                 case SMALLER_COMMAND:
-                    return new NotFilter(SmallerThanFilter(parameters));
+                    return new NotFilter(new SmallerThanFilter(parameters));
                 case FILENAME_COMMAND:
-                    return new NotFilter(FileNameFilter(parameters));
+                    return new NotFilter(new FileNameFilter(parameters));
                 case CONTAINS_COMMAND:
-                    return new NotFilter(NameContainsFilter(parameters));
+                    return new NotFilter(new NameContainsFilter(parameters));
                 case PREFIX_COMMAND:
-                    return new NotFilter(PrefixFilter(parameters));
+                    return new NotFilter(new PrefixFilter(parameters));
                 case SUFFIX_COMMAND:
-                    return new NotFilter(SuffixFilter(parameters));
+                    return new NotFilter(new SuffixFilter(parameters));
                 case WRITABLE_COMMAND:
-                    return new NotFilter(WritableFilter());
+                    return new NotFilter(new WritableFilter());
                 case EXECUTABLE_COMMAND:
-                    return new NotFilter(ExecutableFilter());
+                    return new NotFilter(new ExecutableFilter());
                 case HIDDEN_COMMAND:
-                    return new NotFilter(HiddenFilter());
+                    return new NotFilter(new HiddenFilter());
                 case ALL_COMMAND:
-                    return new NotFilter(AllFilter());
+                    return new NotFilter(new AllFilter());
                 default:
-                    return new NotFilter(AllFilter());
-
+                    throw new TypeIErrorException();
             }
         }
     }
