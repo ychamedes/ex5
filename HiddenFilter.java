@@ -1,6 +1,6 @@
 import java.io.File;
 
-public class HiddenFilter extends AttributeFilter {
+public class HiddenFilter extends GeneralFilter {
 
     @Override
     protected boolean attribute(File file) {
