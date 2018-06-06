@@ -19,7 +19,7 @@ public class Manager {
     }
 
     public void sortDirectoryByCommands(){
-        File[] unFilteredFiles = new File(sourceDirectoryPath).listFiles();
+        File[] unFilteredFiles = new File(sourceDirectoryPath).listFiles(pathname->pathname.isFile());
         try {
             LinkedList<Section> sectionsList = Parsing.parseCommandsFile(commandsFilePath);
 
