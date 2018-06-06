@@ -11,12 +11,12 @@ public class OrderFactory {
     /**
      * Returns the desired type of order, either a regular one or reversed.
      * @param orderType type of order to be returned.
-     * @param isNotReversed should the order be reversed or not.
+     * @param isReversed should the order be reversed or not.
      * @return instance of the desired order.
      */
-    public static Order getOrder(String orderType, boolean isNotReversed) {
+    public static Order getOrder(String orderType, boolean isReversed) throws TypeIErrorException {
 
-        if (isNotReversed){
+        if (!isReversed){
             switch (orderType) {
                 case ABS_ORDER:
                     return new AbsOrder();
@@ -25,7 +25,7 @@ public class OrderFactory {
                 case SIZE_ORDER:
                     return new SizeOrder();
                 default:
-                    return new AbsOrder();
+                    throw new TypeIErrorException();
             }
         } else {
             /* Use ReverseOrder decorator. */
@@ -36,9 +36,9 @@ public class OrderFactory {
                     return new ReverseOrder(new TypeOrder());
                 case SIZE_ORDER:
                     return new ReverseOrder(new SizeOrder());
+                default:
+                    throw new TypeIErrorException();
             }
         }
-
-        return null;
     }
 }
