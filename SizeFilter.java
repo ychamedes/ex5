@@ -6,13 +6,13 @@ public abstract class SizeFilter implements Filter{
     private static final int MAX_PARAMETERS = 2;
     private static final int K_BYTE_CONVERSION_FACTOR = 1024;
 
-    protected int firstBound;
-    protected int secondBound;
+    protected double firstBound;
+    protected double secondBound;
 
     public SizeFilter(FilterParameter...parameters){
-        firstBound = parameters[0].getIntParam();
+        firstBound = parameters[0].getDoubleParam();
         if(parameters.length == MAX_PARAMETERS)
-            secondBound = parameters[1].getIntParam();
+            secondBound = parameters[1].getDoubleParam();
     }
 
     protected abstract boolean attribute(double fileSize);
