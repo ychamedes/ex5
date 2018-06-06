@@ -1,7 +1,7 @@
 import java.io.File;
 import java.util.HashSet;
 
-public abstract class AttributeFilter implements Filter{
+public abstract class GeneralFilter implements Filter{
 
     protected abstract boolean attribute(java.io.File file);
 
