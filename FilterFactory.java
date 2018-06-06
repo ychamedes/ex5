@@ -88,9 +88,9 @@ public class FilterFactory {
     }
 
     private static void checkSizeParams(FilterParameter[] parameters) throws TypeIErrorException{
-        double firstParam = parameters[0].getIntParam();
+        double firstParam = parameters[0].getDoubleParam();
         double secondParam = firstParam;
-        if(parameters.length > 1) secondParam = parameters[1].getIntParam();
+        if(parameters.length > 1) secondParam = parameters[1].getDoubleParam();
         if((firstParam < 0) || (secondParam < 0) || (secondParam < firstParam))
             throw new TypeIErrorException();
     }
