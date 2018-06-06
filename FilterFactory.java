@@ -11,9 +11,6 @@ public class FilterFactory {
     private static final String EXECUTABLE_COMMAND = "executable";
     private static final String HIDDEN_COMMAND = "hidden";
     private static final String ALL_COMMAND = "all";
-    protected static final String[] VALID_FILTERS = {GREATER_COMMAND, BETWEEN_COMMAND, SMALLER_COMMAND, FILENAME_COMMAND,
-            CONTAINS_COMMAND, PREFIX_COMMAND, SUFFIX_COMMAND, WRITABLE_COMMAND, EXECUTABLE_COMMAND, HIDDEN_COMMAND,
-            ALL_COMMAND};
 
 
     public static Filter buildFilter(String filterType, FilterParameter[] parameters, boolean isNot) throws
