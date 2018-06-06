@@ -1,3 +1,5 @@
+package filesprocessing;
+
 public class FilterFactory {
 
     private static final String GREATER_COMMAND = "greater_than";

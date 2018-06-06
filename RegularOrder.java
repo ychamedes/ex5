@@ -1,3 +1,5 @@
+package filesprocessing;
+
 import java.io.File;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -14,7 +16,7 @@ public abstract class RegularOrder implements Order {
     @Override
     public File[] sort(HashSet<File> files) {
 
-        File[] orderedFiles = (File[]) files.toArray();
+        File[] orderedFiles = files.toArray(new File[files.size()]);
         Arrays.sort(orderedFiles, comparator);
 
         return orderedFiles;

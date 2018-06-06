@@ -1,3 +1,5 @@
+package filesprocessing;
+
 public class PrefixFilter extends NameFilter {
 
     PrefixFilter(FilterParameter...parameters){

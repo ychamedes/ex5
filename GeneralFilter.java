@@ -1,3 +1,5 @@
+package filesprocessing;
+
 import java.io.File;
 import java.util.HashSet;
 
@@ -15,4 +17,3 @@ public abstract class GeneralFilter implements Filter{
     }
 
 }
-

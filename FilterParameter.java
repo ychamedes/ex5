@@ -1,3 +1,5 @@
+package filesprocessing;
+
 public class FilterParameter {
 
     private double doubleParam;

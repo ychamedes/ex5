@@ -1,3 +1,5 @@
+package filesprocessing;
+
 public class NameContainsFilter extends NameFilter {
 
     NameContainsFilter(FilterParameter...parameters){

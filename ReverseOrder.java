@@ -1,3 +1,5 @@
+package filesprocessing;
+
 import java.io.File;
 import java.util.Arrays;
 import java.util.Collections;
@@ -21,7 +23,7 @@ public class ReverseOrder implements Order {
     @Override
     public File[] sort(HashSet<File> files) {
 
-        File[] orderedFiles = (File[]) files.toArray();
+        File[] orderedFiles = files.toArray(new File[files.size()]);
         Arrays.sort(orderedFiles, Collections.reverseOrder(order.comparator));
 
         return orderedFiles;

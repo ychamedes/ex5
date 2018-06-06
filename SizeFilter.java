@@ -1,3 +1,5 @@
+package filesprocessing;
+
 import java.io.File;
 import java.util.HashSet;
 
@@ -28,4 +30,3 @@ public abstract class SizeFilter implements Filter{
     }
 
 }
-

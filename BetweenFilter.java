@@ -1,3 +1,5 @@
+package filesprocessing;
+
 public class BetweenFilter extends SizeFilter {
 
     BetweenFilter(FilterParameter...parameters){

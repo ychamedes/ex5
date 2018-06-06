@@ -1,3 +1,5 @@
+package filesprocessing;
+
 public class TypeIIErrorException extends Exception {
 
     public TypeIIErrorException (String errorMessage){

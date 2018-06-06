@@ -1,3 +1,5 @@
+package filesprocessing;
+
 import java.io.File;
 
 public class ExecutableFilter extends GeneralFilter {

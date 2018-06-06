@@ -1,3 +1,5 @@
+package filesprocessing;
+
 public class SuffixFilter extends NameFilter {
 
     SuffixFilter(FilterParameter...parameters){

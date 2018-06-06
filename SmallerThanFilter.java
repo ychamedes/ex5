@@ -1,3 +1,5 @@
+package filesprocessing;
+
 public class SmallerThanFilter extends SizeFilter {
 
     SmallerThanFilter(FilterParameter...parameters){
