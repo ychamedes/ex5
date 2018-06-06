@@ -8,8 +8,10 @@ public class Manager {
 
     private String sourceDirectoryPath;
     private String commandsFilePath;
+    private static final String TYPE_I_ERROR_PREFIX = "Warning in line ";
     private static final String TYPE_II_ERROR_PREFIX = "ERROR: ";
     private static final String INVALID_NUMBER_OF_ARGUMENTS = "Invalid number of arguments. \n";
+    private static final int FILTER_LINE_CORRECTION = 2;
 
     public Manager(String sourceDirectoryPath, String commandsFilePath){
         this.sourceDirectoryPath = sourceDirectoryPath;
@@ -17,21 +19,37 @@ public class Manager {
     }
 
     public void sortDirectoryByCommands(){
-        File[] unFilteredFiles = new File(sourceDirectoryPath).listFiles();;
-        LinkedList<Section> sectionsList = Parsing.parseCommandsFile(commandsFilePath);
+        File[] unFilteredFiles = new File(sourceDirectoryPath).listFiles();
+        try {
+            LinkedList<Section> sectionsList = Parsing.parseCommandsFile(commandsFilePath);
 
-        for (Section section : sectionsList){
-            section.printErrorMessages();
+            for (Section section : sectionsList){
+                // Filter the files.
+                Filter filter = new AllFilter();
+                try {
+                    filter = FilterFactory.buildFilter(section.getFilterCommand(), section.getFilterParameters(),
+                            section.getFilterNot());
+                } catch (TypeIErrorException e){
+                    System.out.println(TYPE_I_ERROR_PREFIX + String.valueOf(section.getLineCount() - FILTER_LINE_CORRECTION));
+                }
+                HashSet<File> filteredFiles = filter.sort(unFilteredFiles);
 
-            // Filter the files.
-            Filter filter = FilterFactory.buildFilter(section.filterCommand, section.filterParameters);
-            HashSet<File> filteredFiles = filter.sort(unFilteredFiles);
+                // Order the filtered files.
+                Order order = new AbsOrder();
+                try {
+                    order = OrderFactory.getOrder(section.getOrderCommand(), section.getOrderReverse());
+                } catch (TypeIErrorException e) {
+                    System.out.println(TYPE_I_ERROR_PREFIX + String.valueOf(section.getLineCount()));
+                }
+                File[] orderedFiles = order.sort(filteredFiles);
 
-            // Order the filtered files.
-            Order order = OrderFactory.getOrder(section.orderCommand, section.orderReverse);
-            File[] orderedFiles = order.sort(filteredFiles);
-
-            // Output ordered files.
+                // Output ordered files.
+                for (File file : orderedFiles){
+                    System.out.println(file.getName());
+                }
+            }
+        } catch (TypeIIErrorException e){
+            printTypeIIError(e.getMessage());
         }
     }
 
