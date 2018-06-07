@@ -101,11 +101,11 @@ public class FilterFactory {
     }
 
     /**
-     *
-     * @param parameters
-     * @param filterType
-     * @return
-     * @throws TypeIErrorException
+     * Checks the validity of the parameters given to the GreaterThan, SmallerThan, and Between filters
+     * @param parameters the bound/s used in the filter
+     * @param filterType a String representing the name of the intended filter
+     * @return An array of doubles representing the bound/s to be used in the filter
+     * @throws TypeIErrorException throws an error if a parameter is illegal
      */
     private static Double[] checkSizeParams(String[] parameters, String filterType) throws TypeIErrorException{
         for(String param : parameters) {
