@@ -1,7 +1,7 @@
 package filesprocessing;
 
 /**
- * SuffixFilter class that analyzes if a file name ends with a specific string.
+ * SuffixFilter class that selects for files with a given suffix.
  */
 public class SuffixFilter extends NameFilter {
 
