@@ -5,6 +5,11 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.LinkedList;
 
+/**
+ * A module that parses a file containing a list of commands for the filesprocessing program. Builds
+ * Section objects to be passed back to the directoryProcessor class, which are then interpreted as
+ * commands for filters and orders.
+ */
 public class Parsing {
 
     private static final String FILTER = "FILTER";
@@ -19,11 +24,19 @@ public class Parsing {
     private static final String IO_ERROR = "IO error encountered. \n";
     private static final String PARAMETER_SPLIT = "#";
 
+    /**
+     * Take a String representing the path of a file containing a list of commands. Use the list of
+     * commands to build and return a LinkedList of Section objects
+     * @param commandsFilePath
+     * @return A LinkedList of Section objects representing the commands to be carried out
+     * @throws TypeIIErrorException if there is a Type II error in the commands file
+     */
     public static LinkedList<Section> parseCommandsFile(String commandsFilePath)  throws TypeIIErrorException {
         BufferedReader reader;
         LinkedList<Section> sectionLinkedList = new LinkedList<>();
 
         try {
+            // Reads the provided commands file using buffering
             reader = new BufferedReader(new FileReader(commandsFilePath));
             String line = reader.readLine();
             boolean firstSubsection = true;
@@ -31,6 +44,8 @@ public class Parsing {
             String orderCommand;
             int lineCount = 0;
 
+            // Passes through each line of the file, interpreting it and building sections according to
+            // those instructions
             while (line != null) {
                 lineCount++;
                 if (firstSubsection) {
@@ -78,6 +93,13 @@ public class Parsing {
         return sectionLinkedList;
     }
 
+    /**
+     * Constructs a Section object representing the commands given in a specific section of the commands file
+     * @param filterCommand the line in the commands file representing the desired filter and parameters
+     * @param orderCommand the line in the commands file representing the desired order and parameters
+     * @param lineCount the number of the current line in the commands file
+     * @return A Section object containing the information to be used by directory processor
+     */
     public static Section buildSection(String filterCommand, String orderCommand, int lineCount){
         String[] splitFilter = filterCommand.split(PARAMETER_SPLIT);
         String[] splitOrder = orderCommand.split(PARAMETER_SPLIT);
