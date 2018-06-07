@@ -1,7 +1,7 @@
 package filesprocessing;
 
 /**
- * SmallerThanClass that analyzes a file's size as less than a bound.
+ * SmallerThanClass that selects for files under a certain size.
  */
 public class SmallerThanFilter extends SizeFilter {
     /**
