@@ -1,7 +1,7 @@
 package filesprocessing;
 
 /**
- * PrefixFilter class that selects for files with a given prefix.
+ * NameContainsFilter class that selects for files with names containing a given sequence.
  */
 public class NameContainsFilter extends NameFilter {
 
