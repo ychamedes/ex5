@@ -5,36 +5,45 @@ jasonmg
 =============================
 =      File description     =
 =============================
-AbsOrder.java
-AllFilter.java
-BetweenFilter.java
-ExecutableFilter.java
-FileNameFilter.java
-Filter.java
-FilterFactory.java
-FilterParameter.java
-GeneralFilter.java
-GreaterThanFilter.java
-HiddenFilter.java
-Manager.java
-NameContainsFilter.java
-NameFilter.java
-NotFilter.java
-Order.java
-OrderFactory.java
-Parsing.java
-PrefixFilter.java
-RegularOrder.java
-ReverseOrder.java
-Section.java
-SizeFilter.java
-SizeOrder.java
-SmallerThanFilter.java
-SuffixFilter.java
-TypeIErrorException.java
-TypeOrder.java
-WritableFilter.java
-
+AbsOrder.java - AbsOrder class used to order a list of files alphanumerically by absolute path.
+AllFilter.java- AllFilter class that "selects" for all files.
+BetweenFilter.java - BetweenFilter class that selects for files with sizes that are between two bounds.
+DirectoryProcessor.java - The main class of the filesprocessing program. Coordinates the actions of all the 
+other modules in the package in order to receive and parse a list of commands and files, filter them based on 
+a given attribute, and output the file names according to a given order.
+ExecutableFilter.java - ExecutableFilter class that selects for files that are executable.
+FileNameFilter.java - FileNameFilter class that selects for files that match a given name
+Filter.java - Filter interface for filter classes (each sorts its own way).
+FilterFactory.java -  A FilterFactory that creates an instance of the desired filter class.
+GeneralFilter.java - GeneralFilter class, an abstract filter class that is inherited by filters that compare 
+attributes, or other general purpose filters that may be added to the module.
+GreaterThanFilter.java - GreaterThanClass that selects for files over a certain size.
+HiddenFilter.java - HiddenFilter class that selects for files that are hidden.
+NameContainsFilter.java - NameContainsFilter class that selects for files with names that contain a given 
+sequence.
+NameFilter.java - NameFilter class, an abstract filter class that is inherited by filters to compare file 
+names and Strings.
+NotFilter.java - NotFilter class that functions as a decorator on a filter class, returning the opposite 
+files.
+Order.java - Order interface for order classes (each sorts its own way).
+OrderFactory.java - An OrderFactory that creates an instance of the desired order class.
+Parsing.java - A module that parses a file containing a list of commands for the filesprocessing program. 
+Builds Section objects to be passed back to the directoryProcessor class, which are then interpreted as 
+commands for filters and orders.
+PrefixFilter.java - PrefixFilter class that selects for files with a given prefix.
+RegularOrder.java - RegularOrder class, which is an abstract class that sorts sets of files into an ordered 
+array.
+ReverseOrder.java - ReverseOrder class that functions as a decorator on a RegularOrder class, making them 
+reverse their order.
+Section.java – Section class that represents a section in the command file and its parameters.
+SizeFilter.java – SizeFilter class, an abstract filter class that is inherited by filters to compare file size
+SizeOrder.java – SizeOrder class used to order a list of files by size.
+SmallerThanFilter.java – SmallerThanClass that selects for files under a certain size.
+SuffixFilter.java – SuffixFilter class that selects for files with a given suffix.
+TypeIErrorException.java – TypeIErrorException class, which is called when there is a Type I Error.
+TypeIIErrorException.java – TypeIIErrorException class, which is called when there is a Type II Error.
+TypeOrder.java - TypeOrder class used to order a list of files by type.
+WritableFilter.java - WritableFilter class that selects for files that are writable.
 
 =============================
 =          Design           =
