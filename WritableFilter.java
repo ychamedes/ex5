@@ -3,12 +3,19 @@ package filesprocessing;
 import java.io.File;
 
 /**
- * WritableFilter class that analyzes if a file is writable.
+ * WritableFilter class that selects for files that are writable.
  */
 public class WritableFilter extends GeneralFilter {
 
+    public WritableFilter(String attributeParam){
+        super(attributeParam)
+    }
+
     @Override
     protected boolean attribute(File file) {
-        return(file.canWrite());
+        if(generalParam.equals(YES_PARAMETER))
+            return(file.canWrite());
+        else
+            return(!file.canWrite());
     }
 }
