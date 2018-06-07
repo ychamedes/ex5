@@ -14,6 +14,7 @@ public class OrderFactory {
      * @param orderType type of order to be returned.
      * @param isReversed should the order be reversed or not.
      * @return instance of the desired order.
+     * @throws TypeIErrorException throw an error if the order type is invalid.
      */
     public static Order getOrder(String orderType, boolean isReversed) throws TypeIErrorException {
 

@@ -11,6 +11,7 @@ public class Parsing {
     private static final String ORDER = "ORDER";
     private static final String NOT = "NOT";
     private static final String REVERSE = "REVERSE";
+    private static final String ORDER_DEFAULT = "abs";
     private static final String FILTER_BAD_SUBSECTION_NAME = "Filter sub-section name may be misspelled. \n";
     private static final String ORDER_BAD_SUBSECTION_NAME = "Order sub-section name may be misspelled. \n";
     private static final String FILTER_SUBSECTION_MISSING = "Filter sub-section is missing. \n";
@@ -35,6 +36,9 @@ public class Parsing {
                 if (firstSubsection) {
                     if (line.equals(FILTER)) {
                         filterCommand = reader.readLine();
+                        if(filterCommand == null) {
+                            throw new TypeIIErrorException(ORDER_SUBSECTION_MISSING);
+                        }
                         lineCount++;
                         firstSubsection = false;
                         line = reader.readLine();
@@ -53,7 +57,7 @@ public class Parsing {
                         }
                         else{
                             line = orderCommand;
-                            orderCommand = null;
+                            orderCommand = ORDER_DEFAULT;
                             //Regardless of order commanding existing, build section with same line count.
                             finalLineCount = lineCount + 1;
                         }
@@ -94,12 +98,10 @@ public class Parsing {
         //Parse filter parameters
         int paramLength = splitFilter.length;
         if(filterNegate) paramLength--;
-        FilterParameter[] finalParametersList = new FilterParameter[paramLength];
+        String[] finalParametersList = new String[paramLength];
 
         // Starting with the second string of parameters (the first is the filter type), compose a list of parameters.
-        for(int paramCounter = 1; paramCounter < paramLength; paramCounter++){
-            finalParametersList[paramCounter - 1] = new FilterParameter(splitFilter[paramCounter]);
-        }
+        System.arraycopy(splitFilter, 1, finalParametersList, 0, paramLength - 1);
 
         return new Section(filterType, orderType, finalParametersList, filterNegate, orderNegate, lineCount);
     }

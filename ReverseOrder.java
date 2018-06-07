@@ -24,6 +24,7 @@ public class ReverseOrder implements Order {
     public File[] sort(HashSet<File> files) {
 
         File[] orderedFiles = files.toArray(new File[files.size()]);
+        Arrays.sort(orderedFiles, Collections.reverseOrder(new CompareAbs()));
         Arrays.sort(orderedFiles, Collections.reverseOrder(order.comparator));
 
         return orderedFiles;

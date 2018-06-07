@@ -1,6 +1,7 @@
 package filesprocessing;
 
 import java.io.File;
+import java.util.Comparator;
 import java.util.HashSet;
 
 /**
@@ -14,4 +15,16 @@ public interface Order {
      * @return the sorted array of files.
      */
     File[] sort(HashSet<File> files);
+
+    /**
+     * A general Comparator class that compares the absolute path of two files.
+     * Used by all orders to sort files within their individual ordering criteria.
+     */
+    public static class CompareAbs implements Comparator<File> {
+
+        @Override
+        public int compare(File o1, File o2) {
+            return o1.getAbsolutePath().compareTo(o2.getAbsolutePath());
+        }
+    }
 }

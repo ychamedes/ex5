@@ -2,7 +2,7 @@ package filesprocessing;
 
 public class GreaterThanFilter extends SizeFilter {
 
-    GreaterThanFilter(FilterParameter...parameters){
+    GreaterThanFilter(Double[] parameters){
         super(parameters);
     }
 

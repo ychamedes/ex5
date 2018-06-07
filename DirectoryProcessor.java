@@ -15,11 +15,21 @@ public class DirectoryProcessor {
     private static final String INVALID_NUMBER_OF_ARGUMENTS = "Invalid number of arguments. \n";
     private static final int FILTER_LINE_CORRECTION = 2;
 
+    /**
+     * Class Constructor specifying a source directory and commands file.
+     * @param sourceDirectoryPath the absolute path of the source directory
+     * @param commandsFilePath the absoulute path of the commands file
+     */
     public DirectoryProcessor(String sourceDirectoryPath, String commandsFilePath){
         this.sourceDirectoryPath = sourceDirectoryPath;
         this.commandsFilePath = commandsFilePath;
     }
 
+    /**
+     * Sorts the files in the source directory by using the commands in the command file.
+     * Prints errors and warning for invalid commands.
+     * Prints the sorted files.
+     */
     public void sortDirectoryByCommands(){
         // Get list of files (and not directories) from source directory path.
         File[] unFilteredFiles = new File(sourceDirectoryPath).listFiles(pathname -> pathname.isFile());
@@ -34,7 +44,7 @@ public class DirectoryProcessor {
                     filter = FilterFactory.buildFilter(section.getFilterCommand(), section.getFilterParameters(),
                             section.getFilterNot());
                 } catch (TypeIErrorException e){
-                    System.out.println(TYPE_I_ERROR_PREFIX + String.valueOf(section.getLineCount() - FILTER_LINE_CORRECTION));
+                    printTypeIError(section.getLineCount() - FILTER_LINE_CORRECTION);
                 }
                 HashSet<File> filteredFiles = filter.sort(unFilteredFiles);
 
@@ -43,7 +53,7 @@ public class DirectoryProcessor {
                 try {
                     order = OrderFactory.getOrder(section.getOrderCommand(), section.getOrderReverse());
                 } catch (TypeIErrorException e) {
-                    System.out.println(TYPE_I_ERROR_PREFIX + String.valueOf(section.getLineCount()));
+                    printTypeIError(section.getLineCount());
                 }
                 File[] orderedFiles = order.sort(filteredFiles);
 
@@ -57,7 +67,16 @@ public class DirectoryProcessor {
         }
     }
 
-    protected static void printTypeIIError(String errorMessage){
+    private static void printTypeIError(int lineCount){
+        //Print a warning with given line count.
+        System.err.println(TYPE_I_ERROR_PREFIX + String.valueOf(lineCount));
+    }
+
+    /**
+     * Print to error a Type II Error message.
+     * @param errorMessage the specific error message to print.
+     */
+    private static void printTypeIIError(String errorMessage){
         //Print a message involving the given parameters
         System.err.println(TYPE_II_ERROR_PREFIX + errorMessage);
 

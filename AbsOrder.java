@@ -9,20 +9,10 @@ import java.util.Comparator;
 public class AbsOrder extends RegularOrder {
 
     /**
-     * Default constructor for a AbsOrder instance.
+     * AbsOrder constructor, using the standard 'abs' comparator.
      */
-    AbsOrder() {
+    public AbsOrder() {
         this.comparator = new CompareAbs();
     }
 
-    /**
-     * A local Comparator class that compares the absolute path of two files.
-     */
-    private class CompareAbs implements Comparator<File> {
-
-        @Override
-        public int compare(File o1, File o2) {
-            return o1.getAbsolutePath().compareTo(o2.getAbsolutePath());
-        }
-    }
 }

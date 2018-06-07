@@ -1,5 +1,8 @@
 package filesprocessing;
 
+/**
+ * An FilterFactory that creates an instance of the desired filter class.
+ */
 public class FilterFactory {
 
     private static final String GREATER_COMMAND = "greater_than";
@@ -16,21 +19,28 @@ public class FilterFactory {
     private static final String YES_PARAMETER = "YES";
     private static final String NO_PARAMETER = "NO";
 
-
-    public static Filter buildFilter(String filterType, FilterParameter[] parameters, boolean isNot) throws
+    /**
+     * Returns the desired type of filter, either a regular one or a "NOT" one.
+     * @param filterType type of filter to be returned.
+     * @param parameters parameters of the filter.
+     * @param isNot should the filter be "NOT".
+     * @return instance of the desired filter.
+     * @throws TypeIErrorException throw an error if the filter type or parameters are invalid.
+     */
+    public static Filter buildFilter(String filterType, String[] parameters, boolean isNot) throws
             TypeIErrorException{
-
+        Double[] newParams;
         if (!isNot) {
             switch (filterType) {
                 case GREATER_COMMAND:
-                    checkSizeParams(parameters);
-                    return new GreaterThanFilter(parameters);
+                    newParams = checkSizeParams(parameters, filterType);
+                    return new GreaterThanFilter(newParams);
                 case BETWEEN_COMMAND:
-                    checkSizeParams(parameters);
-                    return new BetweenFilter(parameters);
+                    newParams = checkSizeParams(parameters, filterType);
+                    return new BetweenFilter(newParams);
                 case SMALLER_COMMAND:
-                    checkSizeParams(parameters);
-                    return new SmallerThanFilter(parameters);
+                    newParams = checkSizeParams(parameters, filterType);
+                    return new SmallerThanFilter(newParams);
                 case FILENAME_COMMAND:
                     return new FileNameFilter(parameters);
                 case CONTAINS_COMMAND:
@@ -54,16 +64,17 @@ public class FilterFactory {
                     throw new TypeIErrorException();
             }
         } else {
+            /* Use NotFilter decorator. */
             switch (filterType) {
                 case GREATER_COMMAND:
-                    checkSizeParams(parameters);
-                    return new NotFilter(new GreaterThanFilter(parameters));
+                    newParams = checkSizeParams(parameters, filterType);
+                    return new NotFilter(new GreaterThanFilter(newParams));
                 case BETWEEN_COMMAND:
-                    checkSizeParams(parameters);
-                    return new NotFilter(new BetweenFilter(parameters));
+                    newParams = checkSizeParams(parameters, filterType);
+                    return new NotFilter(new BetweenFilter(newParams));
                 case SMALLER_COMMAND:
-                    checkSizeParams(parameters);
-                    return new NotFilter(new SmallerThanFilter(parameters));
+                    newParams = checkSizeParams(parameters, filterType);
+                    return new NotFilter(new SmallerThanFilter(newParams));
                 case FILENAME_COMMAND:
                     return new NotFilter(new FileNameFilter(parameters));
                 case CONTAINS_COMMAND:
@@ -89,16 +100,45 @@ public class FilterFactory {
         }
     }
 
-    private static void checkSizeParams(FilterParameter[] parameters) throws TypeIErrorException{
-        double firstParam = parameters[0].getDoubleParam();
+    /**
+     *
+     * @param parameters
+     * @param filterType
+     * @return
+     * @throws TypeIErrorException
+     */
+    private static Double[] checkSizeParams(String[] parameters, String filterType) throws TypeIErrorException{
+        for(String param : parameters) {
+            // Check parameters are numbers.
+            if (param != null && !(param.matches("\\d+(\\.\\d+)?"))) {
+                throw new TypeIErrorException();
+            }
+        }
+
+        double firstParam = Double.parseDouble(parameters[0]);
         double secondParam = firstParam;
-        if(parameters.length > 1) secondParam = parameters[1].getDoubleParam();
-        if((firstParam < 0) || (secondParam < 0) || (secondParam < firstParam))
+        if(parameters.length > 1){
+            //Check invalid number of parameters
+            if (filterType.equals(SMALLER_COMMAND) || filterType.equals(GREATER_COMMAND)) {
+                throw new TypeIErrorException();
+            } else {
+                secondParam = Double.parseDouble(parameters[1]);
+            }
+        }
+        //Check for invalid number parameters
+        if((firstParam < 0) || (secondParam < 0) || (secondParam < firstParam)){
             throw new TypeIErrorException();
+        }
+        return new Double[]{firstParam, secondParam};
     }
 
-    private static void checkAttributeParams(FilterParameter[] parameters) throws TypeIErrorException{
-        String param = parameters[0].getStringParam();
+    /**
+     * Checks the validity of the parameters of an attribute filter.
+     * @param parameters the parameters to check.
+     * @throws TypeIErrorException throws an error if the parameters are invalid.
+     */
+    private static void checkAttributeParams(String[] parameters) throws TypeIErrorException{
+        String param = parameters[0];
         if (!param.equals(YES_PARAMETER) && !param.equals(NO_PARAMETER))
             throw new TypeIErrorException();
     }

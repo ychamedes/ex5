@@ -3,10 +3,15 @@ package filesprocessing;
 import java.io.File;
 import java.util.HashSet;
 
+/**
+ *
+ */
 public abstract class GeneralFilter implements Filter{
 
+    /** */
     protected abstract boolean attribute(java.io.File file);
 
+    @Override
     public HashSet<File> sort(File[] files){
         HashSet<File> resultSet = new HashSet<>();
         for(File file : files){

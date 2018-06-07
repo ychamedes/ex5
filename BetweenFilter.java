@@ -2,7 +2,7 @@ package filesprocessing;
 
 public class BetweenFilter extends SizeFilter {
 
-    BetweenFilter(FilterParameter...parameters){
+    BetweenFilter(Double[] parameters){
         super(parameters);
     }
 

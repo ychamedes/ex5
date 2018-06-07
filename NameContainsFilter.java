@@ -2,7 +2,7 @@ package filesprocessing;
 
 public class NameContainsFilter extends NameFilter {
 
-    NameContainsFilter(FilterParameter...parameters){
+    NameContainsFilter(String[] parameters){
         super(parameters);
     }
 

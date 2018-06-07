@@ -2,7 +2,7 @@ package filesprocessing;
 
 public class PrefixFilter extends NameFilter {
 
-    PrefixFilter(FilterParameter...parameters){
+    PrefixFilter(String[] parameters){
         super(parameters);
     }
 

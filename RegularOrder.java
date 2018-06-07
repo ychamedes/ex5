@@ -17,6 +17,7 @@ public abstract class RegularOrder implements Order {
     public File[] sort(HashSet<File> files) {
 
         File[] orderedFiles = files.toArray(new File[files.size()]);
+        Arrays.sort(orderedFiles, new CompareAbs());
         Arrays.sort(orderedFiles, comparator);
 
         return orderedFiles;
