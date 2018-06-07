@@ -4,6 +4,11 @@ import java.io.File;
 import java.util.HashSet;
 import java.util.LinkedList;
 
+/**
+ * The main class of the filesprocessing program. Coordinates the actions of all the other modules in the
+ * package in order to receive and parse a list of commands and files, filter them based on a given
+ * attribute, and output the file names according to a given order.
+ */
 public class DirectoryProcessor {
 
     private static final int NUMBER_VALID_ARGUMENTS = 2;
