@@ -1,7 +1,7 @@
 package filesprocessing;
 
 /**
- * BetweenThanClass that selects for files with sizes that are between two bounds.
+ * BetweenFilter Class that selects for files with sizes that are between two bounds.
  */
 public class BetweenFilter extends SizeFilter {
 
